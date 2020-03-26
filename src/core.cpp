@@ -1,6 +1,8 @@
 #include <iostream>
 #include <pagmo/population.hpp>
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
 
 #include "naive_converters.hpp"
 #include "naive_udxs.hpp"
@@ -23,9 +25,17 @@ struct extracting_uda {
   template <typename Archive> void serialize(Archive &ar, unsigned){};
 };
 
+bool is_pyobject(const pagmo::problem& p)
+{
+  auto retval = p.get_type_index() == std::type_index(typeid(py::object));
+  return retval;
+}
+
 PYBIND11_MODULE(core, m) {
   // Converters tests
   m.def("test_population_converters", &test_population_converters);
+  // Miscellanea
+  m.def("is_pyobject", &is_pyobject);
   // UDA to test for the extract from pythonic object
   py::class_<extracting_uda> extracting_uda_(m, "extracting_uda");
   extracting_uda_.def(py::init<>())
