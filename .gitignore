@@ -1,0 +1,17 @@
+# Build dirs.
+build*
+
+# Temp files.
+*~
+*.bak
+.DS_Store
+
+# .orig files from patch.
+*.orig
+
+# .so
+*.so
+
+# .out
+*.out
+
