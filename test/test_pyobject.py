@@ -7,5 +7,5 @@ class python_prob:
         return ([0],[1])
 
 print("Is inner a py::object: ", core.is_pyobject( pygmo.problem(python_prob())))
-print("Can I extract a py::object from pagmo::problem: ", core.is_pyobject( pygmo.problem(python_prob())))
+print("Can I extract a py::object from pagmo::problem: ", core.can_extract_pyobject( pygmo.problem(python_prob())))
 
